@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Apartment } from '../core/models/appartement';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-form-appartement',
@@ -9,19 +10,24 @@ import { Apartment } from '../core/models/appartement';
 })
 export class FormAppartementComponent {
   apartForm!: FormGroup
+  id!: any
   apart: Apartment={
-    apartNum: 0, 
-    floorNum: 0, 
-    surface: 0, 
-    terrace: false, 
-    surfaceterrace: 0, 
-    category: "S+2",
+    apartNum: null, 
+    floorNum: null, 
+    surface: null, 
+    terrace: null, 
+    surfaceterrace: null, 
+    category: null,
     ResidenceId: 0 
   }
 
+  constructor(private activatedRoute: ActivatedRoute){}
+
   ngOnInit(){
+    this.id= this.activatedRoute.snapshot.params['id']
+    this.apart.ResidenceId=this.id
     this.apartForm= new FormGroup({
-      apartNum: new FormControl(this.apart.apartNum, Validators.required),
+      apartNum: new FormControl(this.apart.apartNum, [Validators.required, Validators.min(0)]),
       floorNum: new FormControl(this.apart.floorNum, Validators.required),
       terrace: new FormControl(this.apart.terrace, Validators.required),
       surface: new FormControl(this.apart.surface, Validators.required),

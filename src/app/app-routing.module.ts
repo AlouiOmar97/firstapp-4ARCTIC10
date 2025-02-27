@@ -8,14 +8,16 @@ import { ResidenceDetailsComponent } from './residence-details/residence-details
 import { AddResidenceComponent } from './add-residence/add-residence.component';
 import { AppartementComponent } from './appartement/appartement.component';
 import { FormAppartementComponent } from './form-appartement/form-appartement.component';
+import { UpdateResidenceComponent } from './update-residence/update-residence.component';
 
 const routes : Routes = [
   { path:'', redirectTo:'home' , pathMatch:'full'},
   { path:'home' ,  component: HomeComponent},
   { path:'appartement',  component: AppartementComponent},
-  { path:'appartement/add',  component: FormAppartementComponent},
+  { path:'appartement/add/:id',  component: FormAppartementComponent},
   { path:'residence',  component: ResidenceComponent},
   { path:'residence/add',  component: AddResidenceComponent},
+  { path:'residence/update/:id',  component: UpdateResidenceComponent},
   { path:'residence/details/:id', component: ResidenceDetailsComponent},
   { path:'**', component: NotFoundComponent}, 
 ]

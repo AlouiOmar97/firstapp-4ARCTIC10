@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Residence } from '../core/models/residence';
+import { ResidenceService } from '../services/residence.service';
 
 @Component({
   selector: 'app-residence',
@@ -29,6 +30,12 @@ export class ResidenceComponent {
   ];
 
   search: string = '';
+  constructor(private residenceService: ResidenceService){}
+  ngOnInit(){
+    this.residenceService.findAllResidences().subscribe((data)=>{
+      this.listResidences= data
+    })
+  }
   // list: Residence[] = [];
   showLocation(res: Residence) {
     if (res.address === "inconnu") {
@@ -43,5 +50,14 @@ export class ResidenceComponent {
   searchFunction() {
     // this.list = this.listResidences
     // return this.listResidences = this.listResidences.filter(res => res.address.toLocaleLowerCase().includes(this.search.toLocaleLowerCase()))
+  }
+
+  deleteResidence(id: number){
+    this.residenceService.deleteResidence(id).subscribe(()=>{
+      console.log("Residence deleted");
+      this.residenceService.findAllResidences().subscribe((data)=>{
+        this.listResidences= data
+      })
+    })
   }
 }

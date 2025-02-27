@@ -4,36 +4,75 @@
         <form [formGroup]="apartForm">
             <div class="mb-3">
               <label for="apartNum" class="form-label">Apartment Number</label>
-              <input type="text" class="form-control is-valid" formControlName="apartNum" id="apartNum" aria-describedby="nameHelp">
-              <div class="invalid-feedback">
-                Looks bad!
+              <input type="number" class="form-control" [ngClass]="{
+                'is-valid': apartNum?.valid && apartNum?.touched, 
+                'is-invalid': apartNum?.invalid && apartNum?.touched
+              }"  
+              formControlName="apartNum" id="apartNum" aria-describedby="nameHelp">
+              <div *ngIf="apartNum?.valid && apartNum?.touched" class="valid-feedback">
+                Apartment Number is Valid!
               </div>
-              <div class="valid-feedback">
-                Looks good!
+              <div *ngIf="apartNum?.invalid && apartNum?.touched" class="invalid-feedback">
+                <span *ngIf="apartNum?.errors?.['required'] && apartNum?.touched">Apartment Number is required. </span> 
+                <span *ngIf="apartNum?.errors?.['min'] && apartNum?.touched">Apartment Number must be positive. </span> 
               </div>
              </div>
             <div class="mb-3">
               <label for="floorNum" class="form-label">Floor Number</label>
-              <input type="text" class="form-control" formControlName="floorNum" id="floorNum">
+              <input type="number" class="form-control"[ngClass]="{
+                'is-valid': floorNum?.valid && floorNum?.touched, 
+                'is-invalid': floorNum?.invalid && floorNum?.touched
+              }" 
+               formControlName="floorNum" id="floorNum">
+               <div *ngIf="floorNum?.valid && floorNum?.touched" class="valid-feedback">
+                Floor Number is Valid!
+              </div>
+              <div *ngIf="floorNum?.invalid && floorNum?.touched" class="invalid-feedback">
+                <span *ngIf="floorNum?.errors?.['required'] && floorNum?.touched">Floor Number is required. </span> 
+              </div>
             </div>
             <div class="mb-3">
                 <label for="surface" class="form-label">Surface</label>
-                <input type="number" class="form-control" formControlName="surface" id="surface">
+                <input type="number" class="form-control" [ngClass]="{
+                  'is-valid': surface?.valid && surface?.touched, 
+                  'is-invalid': surface?.invalid && surface?.touched
+                }"
+                formControlName="surface" id="surface">
+                <div *ngIf="surface?.valid && surface?.touched" class="valid-feedback">
+                  Surface is Valid!
+                </div>
+                <div *ngIf="surface?.invalid && surface?.touched" class="invalid-feedback">
+                  <span *ngIf="surface?.errors?.['required'] && surface?.touched">Surface is required. </span> 
+                </div>
             </div>
             <div class="col-12">
                 <label for="terrace1" class="form-label">Terrace</label>
                 <div class="offset-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="terrace" value="true" formControlName="terrace" id="terrace1">
+                        <input class="form-check-input" [ngClass]="{
+                          'is-valid': terrace?.valid && terrace?.touched, 
+                          'is-invalid': terrace?.invalid && terrace?.touched
+                        }"
+                         type="radio" name="terrace" value="true" formControlName="terrace" id="terrace1">
                         <label class="form-check-label" for="terrace1">
                           Yes
                         </label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="terrace" value="false" id="terrace2" >
+                        <input class="form-check-input" [ngClass]="{
+                          'is-valid': terrace?.valid && terrace?.touched, 
+                          'is-invalid': terrace?.invalid && terrace?.touched
+                        }"
+                        type="radio" name="terrace" value="false" id="terrace2" >
                         <label class="form-check-label" for="terrace2">
                           No
                         </label>
+                        <div *ngIf="terrace?.valid && terrace?.touched" class="valid-feedback">
+                          Terrace is Valid!
+                        </div>
+                        <div *ngIf="terrace?.invalid && terrace?.touched" class="invalid-feedback">
+                          <span *ngIf="terrace?.errors?.['required'] && terrace?.touched">Terrace is required. </span> 
+                        </div>
                       </div>
                 </div>
 
@@ -41,39 +80,67 @@
 
             <div class="mb-3" *ngIf="terrace?.value =='true'">
                 <label for="st" class="form-label">Surface Terrace</label>
-                <input type="number" class="form-control" formControlName="surfaceterrace" id="st">
+                <input type="number" class="form-control" [ngClass]="{
+                  'is-valid': surfaceterrace?.valid && surfaceterrace?.touched, 
+                  'is-invalid': surfaceterrace?.invalid && surfaceterrace?.touched
+                }" 
+                formControlName="surfaceterrace" id="st">
+                <div *ngIf="surfaceterrace?.valid && surfaceterrace?.touched" class="valid-feedback">
+                  Surface Terrace is Valid!
+                </div>
+                <div *ngIf="surfaceterrace?.invalid && surfaceterrace?.touched" class="invalid-feedback">
+                  <span *ngIf="surfaceterrace?.errors?.['required'] && surfaceterrace?.touched">Surface Terrace is required. </span> 
+                </div>
             </div>
 
             <div class="col-12">
                 <label for="c1" class="form-label">Category</label>
                 <div class="offset-3">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="category" value="S+1" formControlName="category" id="c1">
+                        <input class="form-check-input" [ngClass]="{
+                          'is-valid': category?.valid && category?.touched, 
+                          'is-invalid': category?.invalid && category?.touched
+                        }"
+                        type="radio" name="category" value="S+1" formControlName="category" id="c1">
                         <label class="form-check-label" for="c1">
                           S+1
                         </label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="category" value="S+2" id="c2" >
+                        <input class="form-check-input" [ngClass]="{
+                          'is-valid': category?.valid && category?.touched, 
+                          'is-invalid': category?.invalid && category?.touched
+                        }"
+                        type="radio" name="category" value="S+2" id="c2" >
                         <label class="form-check-label" for="c2">
                           S+2
                         </label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="category" value="S+3" id="c3" >
+                        <input class="form-check-input" [ngClass]="{
+                          'is-valid': category?.valid && category?.touched, 
+                          'is-invalid': category?.invalid && category?.touched
+                        }"
+                        type="radio" name="category" value="S+3" id="c3" >
                         <label class="form-check-label" for="c3">
                           S+3
                         </label>
+                        <div *ngIf="category?.valid && category?.touched" class="valid-feedback">
+                          Category is Valid!
+                        </div>
+                        <div *ngIf="category?.invalid && category?.touched" class="invalid-feedback">
+                          <span *ngIf="category?.errors?.['required'] && category?.touched">Category is required. </span> 
+                        </div>
                       </div>
                 </div>
 
             </div>
             <div class="mb-3">
                 <label for="exampleInputaddress1" class="form-label">Residence</label>
-                <input type="number" class="form-control" formControlName="residence" id="exampleInputaddress1">
+                <input type="number" class="form-control" formControlName="residence" id="exampleInputaddress1" readonly="readonly">
             </div>
             <button type="submit" class="btn btn-primary" [disabled]="apartForm.invalid"  (click)="addApartment()" >Add</button>
-            <input type="reset" value="Reset" class="btn btn-primary m-1" >
+            <input type="reset" value="Reset" class="btn btn-warning m-1" >
 
           </form>
     </div>

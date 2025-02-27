@@ -1,7 +1,7 @@
 <div class="container">
-    <h1>Add Residence</h1>
-    <div>
-        <form [formGroup]="addResidenceForm">
+    <h1>Update Residence</h1>
+    <div *ngIf="updateResidenceForm">
+        <form [formGroup]="updateResidenceForm">
             <div class="mb-3">
               <label for="exampleInputname1" class="form-label">Name</label>
               <input type="text" class="form-control" formControlName="name" id="exampleInputname1" aria-describedby="nameHelp">
@@ -13,7 +13,7 @@
               <input type="text" class="form-control" formControlName="address" id="exampleInputaddress1">
               <div *ngIf="address.dirty && address.errors?.['required']" class="alert alert-danger m-2">Address is required.</div>
             </div>
-            <button type="submit" class="btn btn-primary" [disabled]="addResidenceForm.invalid" (click)="addResidence()" >Add Residence</button>
+            <button type="submit" class="btn btn-primary" [disabled]="updateResidenceForm.invalid" (click)="updateResidence()" >Update Residence</button>
 
           </form>
     </div>

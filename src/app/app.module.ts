@@ -14,7 +14,8 @@ import { AnnonceModule } from './annonce/annonce.module';
 import { AddResidenceComponent } from './add-residence/add-residence.component';
 import { FormAppartementComponent } from './form-appartement/form-appartement.component';
 import { AppartementComponent } from './appartement/appartement.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { UpdateResidenceComponent } from './update-residence/update-residence.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,12 +27,14 @@ import { AppartementComponent } from './appartement/appartement.component';
     ResidenceDetailsComponent,
     AddResidenceComponent,
     FormAppartementComponent,
-    AppartementComponent
+    AppartementComponent,
+    UpdateResidenceComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     AnnonceModule,
     AppRoutingModule,
   ],

@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Residence } from '../core/models/residence';
+import { ResidenceService } from '../services/residence.service';
 
 @Component({
   selector: 'app-residence-details',
   templateUrl: './residence-details.component.html',
-  styleUrls: ['./residence-details.component.css']
+  styleUrls: ['./residence-details.component.css'],
+  providers: []
 })
 export class ResidenceDetailsComponent {
   id!: any
@@ -31,11 +33,14 @@ export class ResidenceDetailsComponent {
       }
     ];
 
-  constructor(private activatedRoute: ActivatedRoute){}
+  constructor(private activatedRoute: ActivatedRoute, private residenceService: ResidenceService){}
   ngOnInit(){
     this.id = this.activatedRoute.snapshot.params['id']
     this.residence = this.listResidences.find( r => r.id == this.id)
     console.log(this.residence);
+    this.residenceService.findResidenceById(this.id).subscribe((data)=>{
+      this.residence= data
+    })
     
   }
 }
